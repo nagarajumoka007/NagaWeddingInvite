@@ -258,10 +258,10 @@ export default function WeddingInvitation() {
         </button>      ) : (
       <section className="invitation-shell">
         <div className="card-artworks" aria-hidden="true">
-          <img className="card-art card-art-jeelakarra" src="/ritual-jeelakarra-bellam.jpg" alt="" />
-          <img className="card-art card-art-talambralu" src="/ritual-talambralu.jpg" alt="" />
-          <img className="card-art card-art-mangalasutra" src="/ritual-mangalasutra.jpg" alt="" />
-          <img className="card-art card-art-panigrahanam" src="/ritual-panigrahanam.jpg" alt="" />
+          <img className="card-art card-art-jeelakarra" src={`${import.meta.env.BASE_URL}ritual-jeelakarra-bellam.jpg`} alt="" />
+          {/* <img className="card-art card-art-talambralu" src={`${import.meta.env.BASE_URL}ritual-talambralu.jpg`} alt="" /> */}
+          <img className="card-art card-art-mangalasutra" src={`${import.meta.env.BASE_URL}ritual-mangalasutra.jpg`} alt="" />
+          {/* <img className="card-art card-art-panigrahanam" src={`${import.meta.env.BASE_URL}ritual-panigrahanam.jpg`} alt="" /> */}
         </div>
         <div className="ornament ornament-top reveal reveal-1">✦ ❧ ✦</div>
         <div className="sacred-blessings reveal reveal-1" aria-label="Auspicious blessings">

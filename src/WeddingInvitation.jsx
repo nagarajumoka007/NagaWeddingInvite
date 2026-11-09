@@ -131,17 +131,105 @@ function EventCard({ title, time, date, venue, location, address, url, icon: Ico
 export default function WeddingInvitation() {
   const [language, setLanguage] = useState("en");
   const [isInvitationOpen, setIsInvitationOpen] = useState(false);
+  const [showFlowerBurst, setShowFlowerBurst] = useState(false);
+  const [isOpening, setIsOpening] = useState(false);
+
   const t = copy[language];
   const isTelugu = language === "te";
+  const openInvitation = () => {
+    if (isOpening || isInvitationOpen) return;
+
+    setIsOpening(true);
+    setShowFlowerBurst(true);
+
+    window.setTimeout(() => {
+      setIsInvitationOpen(true);
+      setIsOpening(false);
+    }, 620);
+
+    window.setTimeout(() => {
+      setShowFlowerBurst(false);
+    }, 2450);
+  };
 
   return (
     <main className={`invitation-page ${isTelugu ? "telugu" : ""}`}>
       <div className="scenic-backdrop" aria-hidden="true" />
       <div className="ambient-glow" aria-hidden="true" />
+      <div className="cinematic-light-rays" aria-hidden="true">
+      <i /><i /><i />
+      </div>
+
+      <div className="ambient-stars" aria-hidden="true">
+        {Array.from({ length: 22 }, (_, i) => (
+          <i
+            key={i}
+            style={{
+              left: `${(i * 43 + 9) % 100}%`,
+              top: `${(i * 29 + 7) % 92}%`,
+              animationDelay: `${-((i * .73) % 5)}s`,
+              animationDuration: `${3.2 + (i % 5) * .7}s`
+            }}
+          />
+        ))}
+      </div>
+
+      <div className="mandala-aura" aria-hidden="true" />
+
+      <div className="gold-particles" aria-hidden="true">
+        {Array.from({ length: 28 }, (_, i) => (
+          <span
+            key={i}
+            style={{
+              left: `${(i * 37 + 11) % 100}%`,
+              animationDelay: `${-((i * 1.37) % 18)}s`,
+              animationDuration: `${12 + (i % 7) * 1.8}s`,
+              "--particle-size": `${2 + (i % 3)}px`
+            }}
+          />
+        ))}
+      </div>
+
+      {/* <div className="diya-glow" aria-hidden="true">
+        <span>🪔</span>
+        <span>🪔</span>
+      </div> */}
+      <div className="gold-particles" aria-hidden="true">
+        {Array.from({ length: 25 }, (_, i) => (
+          <span
+            key={i}
+            style={{
+              left: `${(i * 37) % 100}%`,
+              animationDelay: `${(i % 8) * -1.5}s`,
+              animationDuration: `${8 + (i % 6) * 2}s`
+            }}
+          />
+        ))}
+      </div>
       <div className="petal-layer" aria-hidden="true">
         {Array.from({ length: 18 }, (_, i) => <span key={i} className={`petal petal-${i % 6}`} style={{ left: `${(i * 17 + 3) % 100}%`, animationDelay: `${(i % 9) * -1.7}s`, animationDuration: `${13 + (i % 6) * 2}s` }} />)}
       </div>
       <div className="fairy-lights" aria-hidden="true">{Array.from({ length: 22 }, (_, i) => <i key={i} style={{ left: `${i * 4.7}%`, animationDelay: `${(i % 7) * .25}s` }} />)}</div>
+      {isOpening && (
+      <div className="opening-flash" aria-hidden="true" />
+      )}
+
+      {showFlowerBurst && (
+        <div className="flower-burst" aria-hidden="true">
+          {Array.from({ length: 30 }, (_, i) => (
+            <span
+              key={i}
+              style={{
+                left: `${(i * 31 + 7) % 100}%`,
+                animationDelay: `${(i % 6) * 0.045}s`,
+                animationDuration: `${1.45 + (i % 5) * 0.13}s`,
+                "--burst-drift": `${((i % 7) - 3) * 24}px`,
+                "--burst-rotate": `${(i % 2 ? 1 : -1) * (250 + i * 13)}deg`
+              }}
+            />
+          ))}
+        </div>
+      )}
 
       <div className="language-switch" role="group" aria-label="Select invitation language">
         <Languages size={17} />
@@ -152,10 +240,14 @@ export default function WeddingInvitation() {
       {!isInvitationOpen ? (
         <button
           type="button"
-          className="invitation-cover"
+          className={`invitation-cover ${isOpening ? "is-opening" : ""}`}
           aria-label="Open wedding invitation for Naga Raju and Monika Kiranmai"
-          onClick={() => setIsInvitationOpen(true)}
+          disabled={isOpening}
+          onClick={openInvitation}
         >
+          <span className="cover-orbit" aria-hidden="true">
+            <i /><i /><i /><i />
+          </span>
           <span className="cover-circle">
             <span className="cover-names">
               <span>{isTelugu ? "నాగ రాజు" : "Naga Raju"}</span>
